@@ -1,1 +1,2 @@
-# monty
+monty
+C - Stacks, Queues - LIFO, FIFO
