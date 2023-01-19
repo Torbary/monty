@@ -21,7 +21,6 @@
  * The buffer is then freed and the file is closed.
  *
  */
-
 void read_file(char *filename, stack_t **stack)
 {
 	char *buffer = NULL;
@@ -30,16 +29,15 @@ void read_file(char *filename, stack_t **stack)
 	int line_count = 1;
 	instruct_func s;
 	int check;
-	/*int read;*/
+	int read;
 	FILE *file = fopen(filename, "r");
-
 
 	if (file == NULL)
 	{
 		printf("Error: Can't open file %s\n", filename);
 		error_exit(stack);
 	}
-	while (fgets(buffer, i, file) != NULL)
+	while ((read = getline(&buffer, &i, file)) != -1)
 	{
 		line = parse_line(buffer);
 		if (line == NULL || line[0] == '#')
@@ -61,6 +59,7 @@ void read_file(char *filename, stack_t **stack)
 	if (check == -1)
 		exit(-1);
 }
+
 /**
  * get_op_func -  checks opcode and returns the correct function
  * @str: the opcode
